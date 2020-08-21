@@ -15,7 +15,7 @@ public class custom extends View {
     Paint outline,fortext;
     float midx,midy,innerr,outerr,minr,secr;
     int minutes=0,seconds=0;
-    long millisec=0;
+    float millisec=0;
 
     int reset=1;
     int start=0;
@@ -126,29 +126,29 @@ public class custom extends View {
         midx=canvas.getWidth()/2;
         midy=canvas.getHeight()/2;
 
-        if(minutes<15)
+        if(minutes<180)
 
-        { seconds=(int)(millisec/ 60);
+        { seconds=(int)(millisec*12/ (60));
             if (seconds == 0) {
                 nextsecx =(float)(midx+secr*Math.sin(Math.PI*60/30));
                 nextsecy =(float)(midy-secr*Math.cos(Math.PI*60/30));
             } else {
-                nextsecx = (float)(midx+secr*Math.sin(Math.PI*seconds/30));
-                nextsecy = (float)(midy-secr*Math.cos(Math.PI*seconds/30));
+                nextsecx = (float)(midx+secr*Math.sin(Math.PI*seconds/360));
+                nextsecy = (float)(midy-secr*Math.cos(Math.PI*seconds/360));
             }
             canvas.drawLine(midx, midy, nextsecx, nextsecy, outline);
             minutes = seconds / 60;
             if (minutes == 0) {
-                nextminx = (float)(midx+minr*Math.sin(Math.PI*15/7.5));
-                nextminy = (float)(midy-minr*Math.cos(Math.PI*15/7.5));
+                nextminx = (float)(midx+minr*Math.sin(Math.PI*2));
+                nextminy = (float)(midy-minr*Math.cos(Math.PI*2));
                 canvas.drawLine(midx, midy, nextminx, nextminy, outline);
             } else {
-                nextminx =(float) (midx+minr*Math.sin(Math.PI*minutes/7.5));
-                nextminy = (float)(midy-minr*Math.cos(Math.PI*minutes/7.5));
+                nextminx =(float) (midx+minr*Math.sin(Math.PI*minutes/90));
+                nextminy = (float)(midy-minr*Math.cos(Math.PI*minutes/90));
                 canvas.drawLine(midx, midy, nextminx, nextminy, outline);
             }
 
-            millisec=millisec+1;
+            millisec= (float) (millisec+1);
 
 
             invalidate();}
